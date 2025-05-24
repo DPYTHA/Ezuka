@@ -39,6 +39,8 @@ bcrypt = Bcrypt(app)
 jwt = JWTManager(app)
 mail = Mail(app)
 
+print("DATABASE_URL =", os.getenv("DATABASE_URL"))
+
 class User(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nom = db.Column(db.String(100), nullable=False)

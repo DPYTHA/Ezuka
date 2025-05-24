@@ -6,9 +6,8 @@ load_dotenv()
 
 
 class Config:
-    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL')
+    SQLALCHEMY_DATABASE_URI = os.getenv('DATABASE_URL') or os.getenv('DATABASE-URL')
     SQLALCHEMY_TRACK_MODIFICATIONS = False
-
     SECRET_KEY = os.getenv('SECRET_KEY', 'default_secret_key')
 
     MAIL_SERVER = os.getenv('MAIL_SERVER', 'smtp.gmail.com')
