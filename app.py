@@ -6,7 +6,7 @@ from flask_mail import Mail, Message
 from datetime import datetime, timezone
 from dotenv import load_dotenv
 from flask_jwt_extended import jwt_required, get_jwt_identity
-
+from config import Config
 import os
 from werkzeug.security import generate_password_hash
 from werkzeug.security import check_password_hash
@@ -15,12 +15,15 @@ import smtplib
 from email.mime.text import MIMEText
 from flask_cors import CORS
 app = Flask(__name__) 
+app.config.from_object(Config)
 CORS(app)
 
 # Load env vars
 load_dotenv()
 
 # Configuration
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
