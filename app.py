@@ -24,9 +24,7 @@ load_dotenv()
 # Configuration
 app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv("SQLALCHEMY_DATABASE_URI")
 app.config['SECRET_KEY'] = os.getenv("SECRET_KEY")
-app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 app.config['MAIL_SERVER'] = os.getenv("MAIL_SERVER")
 app.config['MAIL_PORT'] = int(os.getenv("MAIL_PORT"))
 app.config['MAIL_USE_TLS'] = os.getenv("MAIL_USE_TLS") == "True"
@@ -97,10 +95,9 @@ class ExchangeRate(db.Model):
     rate = db.Column(db.Float, nullable=False)
 
 
-@app.route("/")
+@app.route('/')
 def home():
-    return "Backend Flask fonctionnel sur Render 🚀"
-
+    return "Page 1"
 
 @app.route('/admin/fees', methods=['GET', 'POST'])
 def manage_fees():
@@ -148,10 +145,6 @@ def manage_exchange_rates():
 # 🛠 Crée les tables une seule fois
 with app.app_context():
     db.create_all()
-# ROUTES
-@app.route('/')
-def home():
-    return '✅ API de transfert opérationnelle'
 
 @app.route('/register', methods=['POST'])
 def register():
